@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IEEE 754 Converter</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+    .output {
+      background: #f4f4f4;
+      padding: 10px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>IEEE 754 Floating-Point Converter</h1>
+    <input type="text" id="numberInput" placeholder="Enter a number (e.g., 85.125)">
+    <button onclick="convert()">Convert</button>
+    <div class="output">
+      <h2>Single Precision (32-bit):</h2>
+      <p id="singlePrecision"></p>
+      <h2>Double Precision (64-bit):</h2>
+      <p id="doublePrecision"></p>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
