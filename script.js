@@ -32,8 +32,8 @@ function convert() {
 
   // Display results
   document.getElementById("singlePrecision").textContent =
-    `The IEEE 754 Single precision is:\n= ${singleSign} ${singleExponent} ${singleMantissa}`;
+    `${singleSign} ${singleExponent} ${singleMantissa}`;
 
   document.getElementById("doublePrecision").textContent =
-    `The IEEE 754 Double precision is:\n= ${doubleSign} ${doubleExponent} ${doubleMantissa}`;
+    `${doubleSign} ${doubleExponent} ${doubleMantissa}`;
 }
