@@ -3,40 +3,86 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>IEEE 754 Converter</title>
+  <title>Floating-Point Converter</title>
   <style>
+    /* CSS Styles */
     body {
       font-family: Arial, sans-serif;
-      margin: 20px;
+      background-color: #f4f4f4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
     }
+
     .container {
-      max-width: 600px;
-      margin: 0 auto;
-    }
-    input[type="text"] {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      max-width: 500px;
       width: 100%;
-      padding: 10px;
-      margin-bottom: 10px;
     }
-    .output {
-      background: #f4f4f4;
+
+    h1 {
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    input[type="text"] {
+      width: calc(100% - 22px);
       padding: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 16px;
+    }
+
+    button {
+      background-color: #007bff;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    #output {
       margin-top: 20px;
+      text-align: left;
+    }
+
+    h3 {
+      margin-bottom: 10px;
+      color: #333;
+    }
+
+    p {
+      font-family: monospace;
+      background-color: #f9f9f9;
+      padding: 10px;
+      border-radius: 4px;
+      border: 1px solid #ddd;
+      word-wrap: break-word;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>IEEE 754 Floating-Point Converter</h1>
-    <input type="text" id="numberInput" placeholder="Enter a number (e.g., 85.125)">
-    <button onclick="convert()">Convert</button>
-    <div class="output">
-      <h2>Single Precision (32-bit):</h2>
-      <p id="singlePrecision"></p>
-      <h2>Double Precision (64-bit):</h2>
-      <p id="doublePrecision"></p>
-    </div>
+    <h1>Floating-Point Converter</h1>
+    <input type="text" id="numberInput" placeholder="Enter a number">
+    <button id="convertButton">Convert</button>
+    <div id="output"></div>
   </div>
-  <script src="script.js"></script>
+
+    <script src="script.js"></script>
 </body>
 </html>
