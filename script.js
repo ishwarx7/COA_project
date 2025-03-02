@@ -1,58 +1,67 @@
 function convert() {
-  const input = document.getElementById("numberInput").value;
-  const number = parseFloat(input);
+      const input = document.getElementById("numberInput").value;
+      const number = parseFloat(input);
 
-  if (isNaN(number)) {
-    alert("Please enter a valid number.");
-    return;
-  }
+      if (isNaN(number)) {
+        alert("Please enter a valid number.");
+        return;
+      }
 
-  // Split the number into integer and fractional parts
-  const [integerPart, fractionalPart] = String(number).split('.');
+      // Determine the sign bit
+      const signBit = number < 0 ? '1' : '0';
+      const absoluteNumber = Math.abs(number);
 
-  // Convert integer part to binary
-  const integerBinary = parseInt(integerPart, 10).toString(2);
+      // Split the number into integer and fractional parts
+      const [integerPart, fractionalPart] = String(absoluteNumber).split('.');
 
-  // Convert fractional part to binary
-  let fractionalBinary = '';
-  let fractional = parseFloat(`0.${fractionalPart || 0}`);
-  while (fractional !== 0) {
-    fractional *= 2;
-    fractionalBinary += Math.floor(fractional);
-    fractional -= Math.floor(fractional);
-  }
+      // Convert integer part to binary
+      const integerBinary = parseInt(integerPart, 10).toString(2);
 
-  // Combine integer and fractional binary parts
-  const combinedBinary = `${integerBinary}.${fractionalBinary}`;
+      // Convert fractional part to binary
+      let fractionalBinary = '';
+      let fractional = parseFloat(`0.${fractionalPart || 0}`);
+      while (fractional !== 0) {
+        fractional *= 2;
+        fractionalBinary += Math.floor(fractional);
+        fractional -= Math.floor(fractional);
+      }
 
-  // Normalize the binary number
-  const exponent = integerBinary.length - 1;
-  const normalizedMantissa = `${integerBinary}${fractionalBinary}`.substring(1);
+      // Combine integer and fractional binary parts
+      const combinedBinary = `${integerBinary}.${fractionalBinary}`;
 
-  // Single Precision (32-bit)
-  const singleSign = '0'; // Assuming positive number
-  const singleExponent = (127 + exponent).toString(2).padStart(8, '0');
-  const singleMantissa = normalizedMantissa.padEnd(23, '0').substring(0, 23);
+      // Normalize the binary number
+      const exponent = integerBinary.length - 1;
+      const normalizedMantissa = `${integerBinary}${fractionalBinary}`.substring(1);
 
-  const singlePrecision = `${singleSign} ${singleExponent} ${singleMantissa}`;
+      // Single Precision (32-bit)
+      const singleExponent = (127 + exponent).toString(2).padStart(8, '0');
+      const singleMantissa = normalizedMantissa.padEnd(23, '0').substring(0, 23);
 
-  // Double Precision (64-bit)
-  const doubleSign = '0'; // Assuming positive number
-  const doubleExponent = (1023 + exponent).toString(2).padStart(11, '0');
-  const doubleMantissa = normalizedMantissa.padEnd(52, '0').substring(0, 52);
+      const singlePrecision = `${signBit} ${singleExponent} ${singleMantissa}`;
 
-  const doublePrecision = `${doubleSign} ${doubleExponent} ${doubleMantissa}`;
+      // Double Precision (64-bit)
+      const doubleExponent = (1023 + exponent).toString(2).padStart(11, '0');
+      const doubleMantissa = normalizedMantissa.padEnd(52, '0').substring(0, 52);
 
-  // Display results in the desired format
-  const output = `
-    <h3>Single Precision (32-bit):</h3>
-    <p>${singlePrecision}</p>
-    <h3>Double Precision (64-bit):</h3>
-    <p>${doublePrecision}</p>
-  `;
+      const doublePrecision = `${signBit} ${doubleExponent} ${doubleMantissa}`;
 
-  document.getElementById("output").innerHTML = output;
-}
+      // Display results in the desired format
+      const output = `
+        <h3>Single Precision (32-bit):</h3>
+        <p>${singlePrecision}</p>
+        <h3>Double Precision (64-bit):</h3>
+        <p>${doublePrecision}</p>
+      `;
 
-// Add event listener to the button
-document.getElementById("convertButton").addEventListener("click", convert);
+      document.getElementById("output").innerHTML = output;
+    }
+
+    // Add event listener to the button
+    document.getElementById("convertButton").addEventListener("click", convert);
+
+    // Add event listener to the input field for the Enter key
+    document.getElementById("numberInput").addEventListener("keydown", function (event) {
+      if (event.key === "Enter") {
+        convert(); // Trigger the convert function
+      }
+    });
