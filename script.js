@@ -35,7 +35,6 @@ function convert() {
   const singleMantissa = normalizedMantissa.padEnd(23, '0').substring(0, 23);
 
   const singlePrecision = `${singleSign} ${singleExponent} ${singleMantissa}`;
-  const singleHex = parseInt(singlePrecision.replace(/\s/g, ''), 2).toString(16).toUpperCase();
 
   // Double Precision (64-bit)
   const doubleSign = '0'; // Assuming positive number
@@ -43,37 +42,17 @@ function convert() {
   const doubleMantissa = normalizedMantissa.padEnd(52, '0').substring(0, 52);
 
   const doublePrecision = `${doubleSign} ${doubleExponent} ${doubleMantissa}`;
-  const doubleHex = BigInt(`0b${doublePrecision.replace(/\s/g, '')}`).toString(16).toUpperCase();
 
-  // Display results in table format
+  // Display results in the desired format
   const output = `
-    <table border="1">
-      <tr>
-        <th>Step</th>
-        <th>Value</th>
-      </tr>
-      <tr>
-        <td>Input</td>
-        <td>${number}</td>
-      </tr>
-      <tr>
-        <td>Binary Representation</td>
-        <td>${combinedBinary}</td>
-      </tr>
-      <tr>
-        <td>Normalized Form</td>
-        <td>1.${normalizedMantissa} x 2^${exponent}</td>
-      </tr>
-      <tr>
-        <td>Single Precision</td>
-        <td>${singlePrecision}<br>Hex: ${singleHex}</td>
-      </tr>
-      <tr>
-        <td>Double Precision</td>
-        <td>${doublePrecision}<br>Hex: ${doubleHex}</td>
-      </tr>
-    </table>
+    <h3>Single Precision (32-bit):</h3>
+    <p>${singlePrecision}</p>
+    <h3>Double Precision (64-bit):</h3>
+    <p>${doublePrecision}</p>
   `;
 
   document.getElementById("output").innerHTML = output;
 }
+
+// Add event listener to the button
+document.getElementById("convertButton").addEventListener("click", convert);
